@@ -1,6 +1,6 @@
 import Grafo from "./Grafo.js";
-const width = 600;
-const height = 600;
+const width = 500;
+const height = 500;
 let verticeNames = [];
 let fondo;
 var g;
@@ -14,28 +14,31 @@ function draw() {
     textSize(16);
     g.show();
     text("Presione en cualquier parte para añadir un vertice", width / 4, height - 20);
+
 }
 function mouseClicked() {
-    if (mouseButton == LEFT && isInside() == null) {
-        var nombre = prompt("Introduzca el nombre de la antena");
-        if (nombre != null) {
-            g.addVertice(nombre, mouseX, mouseY);
-            verticeNames.push(nombre);
-            console.log(verticeNames.length);
-            if (g.getVerticeLength() > 1) {
-                const penultVerticeName = verticeNames[g.getVerticeLength() - 2];
-                console.log(penultVerticeName);
-                const penultVertice = g.getVertice(penultVerticeName);
-                const ultimoVertice = g.getVertice(nombre);
-                var peso = parseInt(prompt("Introduzca el peso:"));
-                if(peso != NaN) {
-                    g.addArista(penultVertice, ultimoVertice, peso);
-                } else {
-                    alert("No puede introducir una dato no numerico");
+    if (mouseX <= width && mouseX >= 0 && mouseY <= height && mouseY >= 0){
+        if (mouseButton == LEFT && isInside() == null) {
+            var nombre = prompt("Introduzca el nombre de la antena");
+            if (nombre != null) {
+                g.addVertice(nombre, mouseX, mouseY);
+                verticeNames.push(nombre);
+                console.log(verticeNames.length);
+                if (g.getVerticeLength() > 1) {
+                    const penultVerticeName = verticeNames[g.getVerticeLength() - 2];
+                    console.log(penultVerticeName);
+                    const penultVertice = g.getVertice(penultVerticeName);
+                    const ultimoVertice = g.getVertice(nombre);
+                    var peso = parseInt(prompt("Introduzca el peso:"));
+                    if (peso != NaN) {
+                        g.addArista(penultVertice, ultimoVertice, peso);
+                    } else {
+                        alert("No puede introducir una dato no numerico");
+                    }
                 }
+            } else {
+                alert("Error");
             }
-        } else {
-            alert("Error");
         }
     }
 }

@@ -6,14 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapatumadre.js</title>
+    <link rel="stylesheet" href="css/XP.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <h1>Rapatumadre.js</h1>
-    <main></main>
+    <h4>Rapatumadre.js</h4>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <select id="options">
+                        <option value="0">Añadir vertices via click</option>
+                        <option value="1">Añadir arista manual</option>
+                        <option value="2">Alg. de Dijkstra</option>
+                        <option value="3">Alg. de Bellman ford</option>
+                        <option value="4">Alg. de Floyd-Warshall</option>
+                    </select>
+                </td>
+                <td>
+                    <button>Realizar función</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="opt-0">
+        <input type="checkbox" checked id="check1">
+        <label for="check1">añadir aristas automaticamente?</label>
+    </p>
+    <div class="container">
+        <div class="window" id="outer">
+            <div class="title-bar">
+                <div class="title-bar-text">Rapatumadre.js</div>
+            </div>
+            <div class="window-body" id="main">
+                <main></main>
+            </div>
+        </div>
+    </div>
     <script src="js/p5.min.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script>
+        function showOpt() {
+            if (document.getElementById('options').value != "0") {
+                document.getElementById("opt-0").style.display = "none";
+            } else {
+                document.getElementById("opt-0").style.display = "block";
+            }
+        }
+        const selectElement = document.querySelector('#options');
+        selectElement.addEventListener('change', (event) => {
+            showOpt();
+        })
+    </script>
 </body>
 
 </html>
