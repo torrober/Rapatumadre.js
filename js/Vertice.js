@@ -5,6 +5,7 @@ class Vertice {
     y = 0;
     padding = 12;
     visitado = false;
+    isSelected = false;
     constructor(nombre, x, y) {
         this.nombre= nombre;
         this.x = x;
@@ -14,9 +15,15 @@ class Vertice {
         this.vecinos.push(v);
     }
     show() {
-        fill(255);
+        var circleColor = 255;
+        var textColor = 0;
+        if(this.isSelected) {
+            circleColor = 0;
+            textColor = 255;
+        } 
+        fill(circleColor);
         circle(this.x, this.y, 50);
-        fill(0);
+        fill(textColor);
         textSize(12);
         text(this.nombre, this.x-this.padding, this.y);
     }
