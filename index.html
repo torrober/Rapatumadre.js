@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapatumadre.js</title>
-    <link rel="stylesheet" href="css/XP.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <h4>Rapatumadre.js</h4>
+    <p class="logo">
+        <img src="assets/rapatumadrejs.png" width="50%" height="50%">
+    </p>
     <table align="center">
         <tbody>
             <tr>
@@ -20,9 +22,10 @@
                     <select id="options">
                         <option value="0">Añadir vertices via click</option>
                         <option value="1">Añadir arista manual</option>
-                        <option value="2">Alg. de Dijkstra</option>
-                        <option value="3">Alg. de Bellman ford</option>
-                        <option value="4">Alg. de Floyd-Warshall</option>
+                        <option value="2">Matriz de Adyacencia</option>
+                        <option value="3">Alg. de Dijkstra</option>
+                        <option value="4">Alg. de Bellman ford</option>
+                        <option value="5">Alg. de Floyd-Warshall</option>
                     </select>
                 </td>
                 <td>
@@ -35,6 +38,21 @@
         <input type="checkbox" checked id="check1">
         <label for="check1">añadir aristas automaticamente?</label>
     </p>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="window"  id="table-window" style="width: 250px; display: none;">
+                        <div class="title-bar">
+                            <div class="title-bar-text">MatrizDeAdyacencia.exe</div>
+                        </div>
+                        <div class="window-body" id="tables">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <div class="container">
         <div class="window" id="outer">
             <div class="title-bar">

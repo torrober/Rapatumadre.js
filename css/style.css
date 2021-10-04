@@ -1,10 +1,14 @@
 body {
     margin: 0;
     padding: 0;
+    background-image: url('../assets/clouds2.jpg');
 }
 h1, h2, h3, h4, h5, p {
     text-align: center;
     margin: 10px;
+}
+.logo {
+    text-align: center;
 }
 select {
     width: 100%;

@@ -13,10 +13,19 @@ function setup() {
 }
 function draw() {
     image(fondo, 0, 0, width, height);
-    textSize(16);
+    textSize(12);
     g.show();
-    text("Presione en cualquier parte para añadir un vertice", width / 4, height - 20);
-
+    switch(parseInt(document.getElementById("options").value)) {
+        case 0:
+            text("Presione en cualquier parte para añadir un vertice", width / 4, height - 20);
+            break;
+        case 1:
+            text("Presione en cualquier parte para conectar un vertice", width / 4, height - 20);
+            break;
+        case 2:
+            text("Presione en cualquier parte para conseguir la tabla de adyacencias", width / 4, height - 20);
+            break;
+    }
 }
 function addAristasOnClick(nombre) {
     if (g.getVerticeLength() > 1) {
@@ -28,7 +37,7 @@ function addAristasOnClick(nombre) {
         if (peso != NaN) {
             g.addArista(penultVertice, ultimoVertice, peso);
         } else {
-            alert("No puede introducir una dato no numerico");
+            alert("⚠️ No puede introducir una dato no numerico");
         }
     }
 }
@@ -61,6 +70,10 @@ function mouseClicked() {
                     alert("Seleccione un vertice");
                 }
                 break;
+            case 2:
+                generateTableFromMatrix(g.matrizDeAdyacencia());
+            default:
+                break;
         }
     }
 }
@@ -75,7 +88,6 @@ function addVertice() {
     if (nombre != null) {
         g.addVertice(nombre, mouseX, mouseY);
         verticeNames.push(nombre);
-        console.log(verticeNames.length);
         if (document.getElementById('check1').checked) {
             addAristasOnClick(nombre);
         }
@@ -93,6 +105,19 @@ function isInside() {
         }
     }
     return null;
+}
+function generateTableFromMatrix(matrix) {
+    var result = "<table border=1 style='width: 100%;'>";
+    for (var i = 0; i < matrix.length; i++) {
+        result += "<tr>";
+        for (var j = 0; j < matrix[i].length; j++) {
+            result += "<td>" + matrix[i][j] + "</td>";
+        }
+        result += "</tr>";
+    }
+    result += "</table>";
+    document.getElementById("tables").innerHTML = result;
+    document.getElementById("table-window").style.display = 'block';
 }
 window.setup = setup;
 window.draw = draw;
