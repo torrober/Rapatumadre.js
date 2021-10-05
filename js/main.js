@@ -72,6 +72,18 @@ function mouseClicked() {
                 break;
             case 2:
                 generateTableFromMatrix(g.matrizDeAdyacencia());
+            case 3:
+                //generateTableFromMatrix(g.dijkstra(0));
+                document.getElementById("wintable").innerHTML = "MatrizDeDistancias.exe";
+                generateTableFromMatrix(g.matrizDeDistancias());
+                break;
+            case 4:
+                document.getElementById("wintable").innerHTML = "Dijkstra.exe";
+                generateTableFromMatrix(g.dijkstra(0));
+                break;
+            case 6:
+                generateTableFromMatrix(g.gutilsInput());
+                document.getElementById("wintable").innerHTML = "GutilsInput.exe";
             default:
                 break;
         }
