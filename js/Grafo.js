@@ -172,5 +172,36 @@ class Grafo {
         }
         return this.genTabla(dist, V, antecesores);
     }
+    floyd() {
+        let distancia = this.inicioMatriz();
+        for (let k = 0; k < this.vertices.length; k++) {
+            for (let i = 0; i < this.vertices.length; i++) {
+              for (let j = 0; j < this.vertices.length; j++) {
+                if (distancia[i][j] > distancia[i][k] + distancia[k][j] && distancia[i][k] != Number.MAX_VALUE && distancia[k][j] != Number.MAX_VALUE) {
+                  distancia[i][j] =  distancia[i][k] + distancia[k][j];
+                }
+              }
+            }
+          }
+          return distancia;
+    }
+    inicioMatriz() {
+        let distancia = [];
+        for (let i = 0; i < this.vertices.length; i++) {
+            distancia[i] = [];
+          for (let j = 0; j < this.vertices.length; j++) {
+            if (this.getArista(this.vertices[i], this.vertices[j]) != null) {
+              distancia[i][j] = this.getArista(this.vertices[i], this.vertices[j]).peso;
+            } else if (this.getArista(this.vertices[j], this.vertices[i]) != null) {
+              distancia[i][j] = this.getArista(this.vertices[j], this.vertices[i]).peso;
+            } else if (i == j) {
+              distancia[i][j] = 0;
+            } else {
+              distancia[i][j] = Number.MAX_VALUE;
+            }
+          }
+        }
+        return distancia;
+    }
 }
 export default Grafo;

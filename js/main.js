@@ -81,9 +81,12 @@ function mouseClicked() {
                 document.getElementById("wintable").innerHTML = "Dijkstra.exe";
                 generateTableFromMatrix(g.dijkstra(0));
                 break;
+            case 5:
+                //ford
             case 6:
-                generateTableFromMatrix(g.gutilsInput());
-                document.getElementById("wintable").innerHTML = "GutilsInput.exe";
+                document.getElementById("wintable").innerHTML = "PinkFloyd.exe";
+                generateTableFromMatrix(g.floyd());
+                break;
             default:
                 break;
         }
