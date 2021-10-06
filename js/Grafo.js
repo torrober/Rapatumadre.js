@@ -134,6 +134,119 @@ class Grafo {
 
         return posmin;
     }
+
+    bellmanFord2(o){
+        const grafo = this.matrizDeDistancias();
+        const V = grafo.length;
+        const E = this.aristas.length;
+        let antecesores = [];
+        let dist = [];
+
+        //Inicializar primera columna de la tabla
+        for (let i = 0; i < V; i++) {
+            dist[i] = [];
+            antecesores[i] = [];
+            dist[i][0] = Number.MAX_VALUE;
+            antecesores[i][0] = o;
+        }
+        dist[o][0] = 0;
+
+        for(let i=0; i<V; i++){
+            for(let j=0; j<V-1; j++){
+                let n = this.calcularBellman(0, 0, i, 0, j);
+                antecesores[i][j] = n[0];
+                dist[i][j] = n[1];
+            }
+        }
+
+    }
+
+    calcularBellman(previo, inicio, destino, distancia, n){
+        if(n>0){
+            let ar = [];
+            for(let i=0; i<this.aristas.length; i++){
+                if(this.aristas[i].inicio.nombre == inicio){
+                    ar.push(this.aristas[i]);
+                }
+            }
+
+            let d = Number.MAX_VALUE;
+            for(let i=0; i<ar.length; i++){
+                let p = this.calcularBellman(this.ar[i].inicio.nombre, this.ar[i].fin.nombre, destino, distancia+this.aristas[i].peso, n-1);
+                if(p<d){
+                    d = p;
+                }
+            }
+            
+            return d;
+        }else {
+            if(inicio == destino){
+                let arra = [previo, distancia]
+                return arra;
+            }else{
+                return Number.MAX_VALUE;
+            }
+        }
+    }
+
+    bellmanFord(o){
+        
+        const grafo = this.matrizDeDistancias();
+        const V = grafo.length;
+        const E = this.aristas.length;
+        let antecesores = [];
+        let dist = [];
+        let habilitado = [];
+
+        for (let i = 0; i < V; i++) {
+            dist[i] = [];
+            antecesores[i] = [];
+            dist[i][0] = Number.MAX_VALUE;
+            antecesores[i][0] = o;
+        }
+
+        dist[o][0] = 0;
+
+        console.log('hola');
+        for (let i = 0; i < V-1; ++i) {
+            for (let j = 0; j < E; ++j) {
+                let u = this.aristas[j].inicio.nombre;
+                console.log(u);
+                let v = this.aristas[j].fin.nombre;
+                let weight = this.aristas[j].peso;
+                if (dist[u][i] != Number.MAX_VALUE && dist[u][i] + weight < dist[v][i]){
+                    dist[v][i] = dist[u][i] + weight;
+                    antecesores[v][i] = u;
+                }
+            }
+            /*
+            if(i!=0){
+                let d = false;
+                for (let j = 0; j < V; j++) {
+                    if(dist[j][i - 1] = dist[j][i]){
+                        d = true;
+                    }else{
+                        d = false;
+                    }
+
+                }
+                if(d){
+                    break;
+                }
+            }*/
+
+            if (i != V - 2) {
+                for (let j = 0; j < V; j++) {
+                    dist[j][i + 1] = dist[j][i];
+                    antecesores[j][i + 1] = antecesores[j][i];
+                    
+                }
+            }
+        }
+        console.log(dist[0].length+'sdsad');
+        return this.genTabla(dist, V, antecesores);
+    }
+
     dijkstra(o) {
         const grafo = this.matrizDeDistancias();
         const V = grafo.length;
