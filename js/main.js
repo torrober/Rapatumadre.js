@@ -85,9 +85,11 @@ function mouseClicked() {
                 document.getElementById("wintable").innerHTML = "BellmanFord.exe";
                 generateTableFromMatrix(g.bellmanFord2(0));
                 break;
+                //ford
             case 6:
-                generateTableFromMatrix(g.gutilsInput());
-                document.getElementById("wintable").innerHTML = "GutilsInput.exe";
+                document.getElementById("wintable").innerHTML = "PinkFloyd.exe";
+                generateTableFromMatrix(g.floyd());
+                break;
             default:
                 break;
         }
