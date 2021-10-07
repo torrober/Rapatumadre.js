@@ -60,10 +60,10 @@ function mouseClicked() {
                     if (conectarVerticesAux.length == 2) {
                         var peso = parseInt(prompt("Introduzca el peso:"));
                         console.log(peso);
-                        if (isNaN(peso)) {
-                            alert("⚠️ No puede introducir un dato no numerico");
+                        if (!isNaN(peso)) {
+                            g.addArista(penultVertice, ultimoVertice, peso);
                         } else {
-                            g.addArista(conectarVerticesAux[0], conectarVerticesAux[1], peso);
+                            alert("⚠️ No puede introducir una dato no numerico");
                         }
                         conectarVerticesAux.length = 0;
                     }
