@@ -152,72 +152,19 @@ class Grafo {
         dist[o][0] = 0;
 
         for(let i=0; i<V; i++){
-            for(let j=0; j<V-1; j++){
-                let n = this.calcularBellman(0, 0, i, 0, j);
-                antecesores[i][j] = n[0];
-                dist[i][j] = n[1];
-            }
-        }
+            for(let j=0; j<V; j++){
 
-    }
+                console.log('iteracion i='+i+', j= '+j);
 
-    calcularBellman(previo, inicio, destino, distancia, n){
-        if(n>0){
-            let ar = [];
-            for(let i=0; i<this.aristas.length; i++){
-                if(this.aristas[i].inicio.nombre == inicio){
-                    ar.push(this.aristas[i]);
+                const n = this.calcularBellman(0, 0, i, 0, j);
+                console.log('calculo bellman desde 0 hasta '+i+': '+n);
+                if(n[1]!=Number.MAX_VALUE){
+                    console.log('antecesor'+n[0]);
+                    console.log('distancia mi'+n[1]);
+                    antecesores[i][j] = n[0];
+                    dist[i][j] = n[1];
                 }
-            }
-
-            let d = Number.MAX_VALUE;
-            for(let i=0; i<ar.length; i++){
-                let p = this.calcularBellman(this.ar[i].inicio.nombre, this.ar[i].fin.nombre, destino, distancia+this.aristas[i].peso, n-1);
-                if(p<d){
-                    d = p;
-                }
-            }
-            
-            return d;
-        }else {
-            if(inicio == destino){
-                let arra = [previo, distancia]
-                return arra;
-            }else{
-                return Number.MAX_VALUE;
-            }
-        }
-    }
-
-    bellmanFord(o){
-        
-        const grafo = this.matrizDeDistancias();
-        const V = grafo.length;
-        const E = this.aristas.length;
-        let antecesores = [];
-        let dist = [];
-        let habilitado = [];
-
-        for (let i = 0; i < V; i++) {
-            dist[i] = [];
-            antecesores[i] = [];
-            dist[i][0] = Number.MAX_VALUE;
-            antecesores[i][0] = o;
-        }
-
-        dist[o][0] = 0;
-
-        console.log('hola');
-        for (let i = 0; i < V-1; ++i) {
-            for (let j = 0; j < E; ++j) {
-                let u = this.aristas[j].inicio.nombre;
-                console.log(u);
-                let v = this.aristas[j].fin.nombre;
-                let weight = this.aristas[j].peso;
-                if (dist[u][i] != Number.MAX_VALUE && dist[u][i] + weight < dist[v][i]){
-                    dist[v][i] = dist[u][i] + weight;
-                    antecesores[v][i] = u;
-                }
+                
             }
             /*
             if(i!=0){
@@ -228,13 +175,13 @@ class Grafo {
                     }else{
                         d = false;
                     }
-
+    
                 }
                 if(d){
                     break;
                 }
             }*/
-
+    
             if (i != V - 2) {
                 for (let j = 0; j < V; j++) {
                     dist[j][i + 1] = dist[j][i];
@@ -243,8 +190,41 @@ class Grafo {
                 }
             }
         }
-        console.log(dist[0].length+'sdsad');
         return this.genTabla(dist, V, antecesores);
+
+    }
+
+    calcularBellman(previo, inicio, destino, distancia, n){
+        let ar = [];
+        if(n>0){
+            
+            let d = Number.MAX_VALUE;
+            for(let i=0; i<this.aristas.length; i++){
+                if(this.aristas[i].inicio.nombre == inicio){
+                    let pesoNuevo = this.aristas[i].peso + distancia;
+                    let p = this.calcularBellman(this.aristas[i].inicio.nombre, this.aristas[i].fin.nombre, destino, pesoNuevo, n-1);
+                    if(p<d){
+                        d = p;
+                    }
+                }
+            }
+            
+            return d;
+        }else {
+            if(inicio == destino){
+                
+                let a = parseInt(previo);
+                let b = distancia;
+                console.log('antecesor: '+ a+ 'dist: '+ b);
+                let arra = [a, b];
+                console.log('arra que se entregara :'+arra);
+                return arra;
+            }else{
+                let arra = [0, Number.MAX_VALUE];
+                console.log('no se llego :'+arra);
+                return arra;
+            }
+        }
     }
 
     dijkstra(o) {
