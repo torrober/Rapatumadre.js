@@ -91,7 +91,7 @@ class Grafo {
         let tabla = [];
         for (let i = 0; i < V; i++) {
             tabla[i] = [];
-            for (let j = 0; j < V - 1; j++) {
+            for (let j = 0; j < V-1; j++) {
                 const nombre = this.vertices[antecesores[i][j]].nombre;
                 //p = p;
                 if (dist[i][j] == Number.MAX_VALUE) {
@@ -101,6 +101,24 @@ class Grafo {
                 }
             }
         }
+        
+        return tabla;
+    }
+    genTablaFord(dist, V, antecesores) {
+        let tabla = [];
+        for (let i = 0; i < V; i++) {
+            tabla[i] = [];
+            for (let j = 0; j < V; j++) {
+                const nombre = this.vertices[antecesores[i][j]].nombre;
+                //p = p;
+                if (dist[i][j] == Number.MAX_VALUE) {
+                    tabla[i][j] = nombre + ", ∞";
+                } else {
+                    tabla[i][j] = nombre + ", " + dist[i][j];
+                }
+            }
+        }
+        
         return tabla;
     }
     gutilsInput() {
@@ -189,7 +207,9 @@ class Grafo {
                 }
             }
         }
-        return this.genTabla(dist, V, antecesores);
+        console.log(dist);
+        console.log(antecesores);
+        return this.genTablaFord(dist, V, antecesores);
 
     }
 
@@ -202,6 +222,7 @@ class Grafo {
                 if(this.aristas[i].inicio.nombre == inicio){
                     console.log('n: '+n);
                     let pesoNuevo = this.aristas[i].peso + distancia;
+                    console.log(this.aristas[i]);
                     let p = this.calcularBellman(this.aristas[i].inicio.nombre, this.aristas[i].fin.nombre, destino, pesoNuevo, n-1);
                     
                     console.log('p: '+p);
@@ -266,6 +287,7 @@ class Grafo {
                 }
             }
         }
+        console.log(dist);
         return this.genTabla(dist, V, antecesores);
     }
     floyd() {
