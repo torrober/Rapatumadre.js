@@ -15,7 +15,7 @@ function draw() {
     image(fondo, 0, 0, width, height);
     textSize(12);
     g.show();
-    switch(parseInt(document.getElementById("options").value)) {
+    switch (parseInt(document.getElementById("options").value)) {
         case 0:
             text("Presione en cualquier parte para añadir un vertice", width / 4, height - 20);
             break;
@@ -34,7 +34,7 @@ function addAristasOnClick(nombre) {
         const penultVertice = g.getVertice(penultVerticeName);
         const ultimoVertice = g.getVertice(nombre);
         var peso = parseInt(prompt("Introduzca el peso:"));
-        if (peso != NaN) {
+        if (!isNaN(peso)) {
             g.addArista(penultVertice, ultimoVertice, peso);
         } else {
             alert("⚠️ No puede introducir una dato no numerico");
@@ -59,10 +59,11 @@ function mouseClicked() {
                     conectarVerticesAux.push(isInside());
                     if (conectarVerticesAux.length == 2) {
                         var peso = parseInt(prompt("Introduzca el peso:"));
-                        if (peso != NaN) {
-                            g.addArista(conectarVerticesAux[0], conectarVerticesAux[1], peso);
+                        console.log(peso);
+                        if (isNaN(peso)) {
+                            alert("⚠️ No puede introducir un dato no numerico");
                         } else {
-                            alert("No puede introducir una dato no numerico");
+                            g.addArista(conectarVerticesAux[0], conectarVerticesAux[1], peso);
                         }
                         conectarVerticesAux.length = 0;
                     }
@@ -85,7 +86,7 @@ function mouseClicked() {
                 document.getElementById("wintable").innerHTML = "BellmanFord.exe";
                 generateTableFromMatrix(g.bellmanFord2(0));
                 break;
-                //ford
+            //ford
             case 6:
                 document.getElementById("wintable").innerHTML = "PinkFloyd.exe";
                 generateTableFromMatrix(g.floyd());
