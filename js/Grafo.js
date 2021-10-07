@@ -156,11 +156,10 @@ class Grafo {
 
                 console.log('iteracion i='+i+', j= '+j);
 
-                const n = this.calcularBellman(0, 0, i, 0, j);
-                console.log('calculo bellman desde 0 hasta '+i+': '+n);
+                const n = this.calcularBellman(o, o, i, 0, j);
+                console.log(n);
+                console.log(' ');
                 if(n[1]!=Number.MAX_VALUE){
-                    console.log('antecesor'+n[0]);
-                    console.log('distancia mi'+n[1]);
                     antecesores[i][j] = n[0];
                     dist[i][j] = n[1];
                 }
@@ -182,7 +181,7 @@ class Grafo {
                 }
             }*/
     
-            if (i != V - 2) {
+            if (i != V - 1) {
                 for (let j = 0; j < V; j++) {
                     dist[j][i + 1] = dist[j][i];
                     antecesores[j][i + 1] = antecesores[j][i];
@@ -198,24 +197,28 @@ class Grafo {
         let ar = [];
         if(n>0){
             
-            let d = Number.MAX_VALUE;
+            let d = [0, Number.MAX_VALUE];
             for(let i=0; i<this.aristas.length; i++){
                 if(this.aristas[i].inicio.nombre == inicio){
+                    console.log('n: '+n);
                     let pesoNuevo = this.aristas[i].peso + distancia;
                     let p = this.calcularBellman(this.aristas[i].inicio.nombre, this.aristas[i].fin.nombre, destino, pesoNuevo, n-1);
-                    if(p<d){
-                        d = p;
+                    
+                    console.log('p: '+p);
+                    if(p[1]!=Number.MAX_VALUE){
+                        d[0] = p[0];
+                        d[1] = p[1];
                     }
                 }
             }
             
+
             return d;
         }else {
             if(inicio == destino){
                 
-                let a = parseInt(previo);
+                let a = previo;
                 let b = distancia;
-                console.log('antecesor: '+ a+ 'dist: '+ b);
                 let arra = [a, b];
                 console.log('arra que se entregara :'+arra);
                 return arra;
