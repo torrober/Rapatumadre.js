@@ -61,7 +61,7 @@ function mouseClicked() {
                         var peso = parseInt(prompt("Introduzca el peso:"));
                         console.log(peso);
                         if (!isNaN(peso)) {
-                            g.addArista(penultVertice, ultimoVertice, peso);
+                            g.addArista(conectarVerticesAux[0], conectarVerticesAux[1], peso);
                         } else {
                             alert("⚠️ No puede introducir una dato no numerico");
                         }
@@ -72,7 +72,9 @@ function mouseClicked() {
                 }
                 break;
             case 2:
+                document.getElementById("wintable").innerHTML = "MatrizDeAdyacencia.exe";
                 generateTableFromMatrix(g.matrizDeAdyacencia());
+                break;
             case 3:
                 //generateTableFromMatrix(g.dijkstra(0));
                 document.getElementById("wintable").innerHTML = "MatrizDeDistancias.exe";
@@ -83,8 +85,9 @@ function mouseClicked() {
                 generateTableFromMatrix(g.dijkstra(0));
                 break;
             case 5:
-                document.getElementById("wintable").innerHTML = "BellmanFord.exe";
-                generateTableFromMatrix(g.bellmanFord2(0));
+                //document.getElementById("wintable").innerHTML = "BellmanFord.exe";
+                //generateTableFromMatrix(g.bellmanFord2(0));
+                alert("No hay bellman-ford en JS :(");
                 break;
             //ford
             case 6:

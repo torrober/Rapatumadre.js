@@ -292,7 +292,7 @@ class Grafo {
               }
             }
           }
-          return distancia;
+        return distancia;
     }
     inicioMatriz() {
         let distancia = [];
